@@ -5,44 +5,43 @@ using RFIDLib;
 
 namespace vb6_FP_Scale_SDK
 {
-
-    [ComVisible(true), Guid("2DBD1BA4-6402-4850-B746-72AAD993946C"), InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
+    [ComVisible(true), Guid("4F390D54-1271-4498-8A74-C2B976EE3B60"), InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
     public interface IComEvents
     {
-        [DispId(1)]
-        void RFIDDeviceFPEvent(int eventType, string args);
+        [DispId(0x00000001)]
+        void RFIDDeviceFPEvent(string eventType, string args);
     }
 
     [ComVisible(true), Guid("21535409-7153-45C2-A4CB-EA44A61DF135")]
     public interface IComOjbect
     {
-        [DispId(1)]
+        [DispId(0x10000001)]
         string[] FindDevice();
-        [DispId(2)]
+        [DispId(0x10000002)]
         bool ConnectDevice(string SerialNumber);
-        [DispId(3)]
+        [DispId(0x10000003)]
         bool ConnectDeviceScale(string SerialNumber,string scale);
-        [DispId(4)]
+        [DispId(0x10000004)]
         void DisposeDevice();
-        [DispId(5)]
+        [DispId(0x10000005)]
         void StopScan();
-        [DispId(6)]
+        [DispId(0x10000006)]
         string ScanDevice();
-        [DispId(7)]
+        [DispId(0x10000007)]
         void EnableWait();
-        [DispId(8)]
+        [DispId(0x10000008)]
         void DisbleWait();
-        [DispId(9)]
+        [DispId(0x10000009)]
         string ScanWithWeight();
-        [DispId(10)]
+        [DispId(0x10000010)]
         void loadUserTemplate();
-        [DispId(11)]
+        [DispId(0x10000011)]
         string enrollUserFingerprint(string fname, string lname);
-        [DispId(12)]
+        [DispId(0x10000012)]
         string modifyUserFingerprint(string fname, string lname, string fpTemplate);
-        [DispId(13)]
+        [DispId(0x10000013)]
         void EnableAutoWeight();
-        [DispId(14)]
+        [DispId(0x10000014)]
         void DisableAutoWeight();
     }
 
@@ -50,12 +49,12 @@ namespace vb6_FP_Scale_SDK
     public class Vb6ScaleFP : IComOjbect, IObjectSafety
     {
         [ComVisible(false)]
-        public delegate void RFIDDeviceFPEvent(int eventType, string args);
+        public delegate void RFIDDeviceFPEventHandker(string eventType, string args);
         private const int INTERFACESAFE_FOR_UNTRUSTED_CALLER = 1;
         private const int INTERFACESAFE_FOR_UNTRUSTED_DATA = 2;
         private const int S_OK = 0;
         private RFID_Device objDevice;
-        public event Vb6ScaleFP.RFIDDeviceFPEvent DeviceEvent;
+        public event Vb6ScaleFP.RFIDDeviceFPEventHandker RFIDDeviceFPEvent;
 
         public Vb6ScaleFP()
 		{
@@ -69,30 +68,30 @@ namespace vb6_FP_Scale_SDK
 
         private void tagAdd(string a)
         {
-            OnDeviceEvent(1, a);
+            OnDeviceEvent("1", a);
         }
         private void msgAdd(string a, string user)
         {
-            OnDeviceEvent(2, a + "-" + user);
+            OnDeviceEvent("2", a + "-" + user);
         }
         private void errorAdd(string a)
         {
-            OnDeviceEvent(3, a);
+            OnDeviceEvent("3", a);
         }
 
         private void DevStAdd(string a)
         {
-            OnDeviceEvent(4, a);
+            OnDeviceEvent("4", a);
         }
 
         private void fpDevStAdd(string a)
         {
-            OnDeviceEvent(5, a);
+            OnDeviceEvent("5", a);
         }
 
         private void weightAdd(string a, string b)
         {
-            OnDeviceEvent(6, a+"-"+b);
+            OnDeviceEvent("6", a + "-" + b);
         }
 
         public string[] FindDevice() { return RFID.FindDevice(); }
@@ -121,11 +120,11 @@ namespace vb6_FP_Scale_SDK
         public void DisableAutoWeight() { RFID.DisableAutoWeight(); }
 
         [ComVisible(false)]
-        private void OnDeviceEvent(int eventType, string args)
+        private void OnDeviceEvent(string eventType, string args)
         {
-            if (this.DeviceEvent != null)
+            if (this.RFIDDeviceFPEvent != null)
             {
-                this.DeviceEvent(eventType, args);
+                this.RFIDDeviceFPEvent(eventType, args);
             }
         }
  

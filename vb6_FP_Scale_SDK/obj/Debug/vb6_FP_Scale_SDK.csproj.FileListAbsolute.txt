@@ -1,0 +1,5 @@
+D:\E\DropBOX1\Dropbox\vb6_USB_FP_SDK\vb6_FP_Scale_SDK\bin\Debug\vb6_FP_Scale_SDK.dll
+D:\E\DropBOX1\Dropbox\vb6_USB_FP_SDK\vb6_FP_Scale_SDK\bin\Debug\vb6_FP_Scale_SDK.pdb
+D:\E\DropBOX1\Dropbox\vb6_USB_FP_SDK\vb6_FP_Scale_SDK\obj\Debug\vb6_FP_Scale_SDK.dll
+D:\E\DropBOX1\Dropbox\vb6_USB_FP_SDK\vb6_FP_Scale_SDK\obj\Debug\vb6_FP_Scale_SDK.pdb
+D:\E\DropBOX1\Dropbox\vb6_USB_FP_SDK\vb6_FP_Scale_SDK\bin\Debug\vb6_FP_Scale_SDK.tlb
